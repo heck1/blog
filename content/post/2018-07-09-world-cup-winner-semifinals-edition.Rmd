@@ -33,7 +33,7 @@ Without further ado, here is the final plot:
 The y-Axis highlights the frequency of a given odd while the x-axis shows the probability of a given team taking the title home. As we can clearly see, France leads by a margin of over 5%.
 Belgium/England follow and Croatia is far behind.
 
-## Scraping soccer odds and visualize the results
+## Scraping soccer odds and visualizing the results (aka how to produce the plot)
 
 So, let's get to it:
 I found a decent site for different betting sources here: <https://www.wettfreunde.net/wm-2018-quoten/>.
