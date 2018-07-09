@@ -28,8 +28,7 @@ Since Croatia beat Russia on Saturday, the Semifinals for this year's World Cup 
 I wanted to see wether the variance in odds between bookmarkers allows to draw conclusions on who will actually win (of course, it most likely will not).
 Without further ado, here is the final plot:
 
-![Plot](https://raw.githubusercontent.com/heck1/blog/master/static/images/prediction.png)
-
+![](/post/2018-07-09-world-cup-winner-semifinals-edition_files/prediction.png)
 
 ## Scraping soccer odds and visualize the results
 
