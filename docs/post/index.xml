@@ -29,7 +29,7 @@ This blog is powered by RMarkdown, hosted on GitHub and currently runs on the am
       <guid>/blog/2018/07/09/world-cup-winner-semifinals-edition/</guid>
       <description>Since Croatia beat Russia on Saturday, the Semifinals for this year’s World Cup are set:
  England Belgium France Croatia  I wanted to see wether the variance in odds between bookmarkers allows to draw conclusions on who will actually win (of course, it most likely will not). Without further ado, here is the final plot:
- Scraping soccer odds and visualize the results So, let’s get to it: I found a decent site for different betting sources here: https://www.</description>
+ The y-Axis highlights the frequency of a given odd while the x-axis shows the probability of a given team taking the title home.</description>
     </item>
     
   </channel>

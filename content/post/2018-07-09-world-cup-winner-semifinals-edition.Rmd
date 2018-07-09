@@ -28,7 +28,10 @@ Since Croatia beat Russia on Saturday, the Semifinals for this year's World Cup 
 I wanted to see wether the variance in odds between bookmarkers allows to draw conclusions on who will actually win (of course, it most likely will not).
 Without further ado, here is the final plot:
 
-![](/post/2018-07-09-world-cup-winner-semifinals-edition_files/prediction.png)
+![](https://raw.githubusercontent.com/heck1/blog/master/static/images/prediction.png)
+
+The y-Axis highlights the frequency of a given odd while the x-axis shows the probability of a given team taking the title home. As we can clearly see, France leads by a margin of over 5%.
+Belgium/England follow and Croatia is far behind.
 
 ## Scraping soccer odds and visualize the results
 
@@ -120,7 +123,6 @@ ggplot(new_df, aes(x = new_df$probs , fill = new_df$Team)) +
        fill = "Champion") 
 ```
 
-We can conclude that France is the single "favorite" left. Belgium / England are second and third and Crotia is far behind in fourth place.
 
 
 Hope you enjoyed my first entry, you can find the replication code for this post [here](https://gist.github.com/heck1/df165d3b9f3f177133be4c6bd0fd6f0f).

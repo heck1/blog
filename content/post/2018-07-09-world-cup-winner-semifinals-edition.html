@@ -24,9 +24,10 @@ tags:
 </ul>
 <p>I wanted to see wether the variance in odds between bookmarkers allows to draw conclusions on who will actually win (of course, it most likely will not). Without further ado, here is the final plot:</p>
 <div class="figure">
-<img src="/post/2018-07-09-world-cup-winner-semifinals-edition_files/prediction.png" />
+<img src="https://raw.githubusercontent.com/heck1/blog/master/static/images/prediction.png" />
 
 </div>
+<p>The y-Axis highlights the frequency of a given odd while the x-axis shows the probability of a given team taking the title home. As we can clearly see, France leads by a margin of over 5%. Belgium/England follow and Croatia is far behind.</p>
 <div id="scraping-soccer-odds-and-visualize-the-results" class="section level2">
 <h2>Scraping soccer odds and visualize the results</h2>
 <p>So, let’s get to it: I found a decent site for different betting sources here: <a href="https://www.wettfreunde.net/wm-2018-quoten/" class="uri">https://www.wettfreunde.net/wm-2018-quoten/</a>. Since the link luckily contains a html-table, scraping is rather arbitrary:</p>
@@ -145,6 +146,5 @@ new_df</code></pre>
   labs(title = &quot;World Champion Predictions&quot;, x = &quot;Probabilities&quot;, y = &quot;Frequency of Odds&quot;,
        fill = &quot;Champion&quot;) </code></pre>
 <p><img src="/blog/post/2018-07-09-world-cup-winner-semifinals-edition_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<p>We can conclude that France is the single “favorite” left. Belgium / England are second and third and Crotia is far behind in fourth place.</p>
 <p>Hope you enjoyed my first entry, you can find the replication code for this post <a href="https://gist.github.com/heck1/df165d3b9f3f177133be4c6bd0fd6f0f">here</a>.</p>
 </div>
