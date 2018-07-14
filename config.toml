@@ -1,7 +1,7 @@
 baseurl = "https://heck1.github.io/blog/"
 publishDir = "docs"
 languageCode = "en-us"
-title = "A Hugo website"
+title = "Lukas Heck"
 theme = "hugo-lithium"
 googleAnalytics = "UA-121885797-1"
 disqusShortname = "Lukas Heck"
@@ -21,7 +21,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     url = "https://www.linkedin.com/in/lukasheck/"
 
 [params]
-    description = "My website built through Hugo and blogdown."
+    description = "Lukas Heck - Data Analyst and Political Scientist"
 
     # options for highlight.js (version, additional languages, and theme)
     highlightjsVersion = "9.11.0"
