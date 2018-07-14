@@ -1,5 +1,5 @@
 ---
-title: Hello World
+title: Hello World!
 author: Lukas Heck
 date: '2018-07-09'
 slug: hello-world
