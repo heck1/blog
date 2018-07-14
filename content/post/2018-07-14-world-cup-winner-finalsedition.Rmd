@@ -1,0 +1,17 @@
+---
+title: World Cup Winner - Finals Edition
+author: Lukas Heck
+date: '2018-07-09'
+slug: world-cup-winner-finalsedition
+categories: [R]
+tags:
+  - rstats
+  - r
+  - data
+  - ggplot2
+  - visuzalisation
+---
+
+Like promised, here is the updated plot after the finals:
+
+![](https://raw.githubusercontent.com/heck1/blog/master/static/images/winner.png)
