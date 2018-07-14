@@ -3,7 +3,7 @@ publishDir = "docs"
 languageCode = "en-us"
 title = "A Hugo website"
 theme = "hugo-lithium"
-googleAnalytics = ""
+googleAnalytics = "UA-121885797-1"
 disqusShortname = "Lukas Heck"
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
