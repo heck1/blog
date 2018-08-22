@@ -45,22 +45,23 @@ This blog is powered by RMarkdown, hosted on GitHub and currently runs on the am
     </item>
     
     <item>
-      <title>About</title>
-      <link>/blog/about/</link>
-      <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
-      
-      <guid>/blog/about/</guid>
-      <description>Find my current CV here.
-Contact me at: lukasheck1@gmail.com</description>
-    </item>
-    
-    <item>
       <title></title>
       <link>/blog/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/blog/about/</guid>
       <description>About       code{white-space: pre;} pre:not([class]) { background-color: white; }  if (window.hljs) { hljs.configure({languages: []}); hljs.initHighlightingOnLoad(); if (document.readyState &amp;&amp; document.readyState === &#34;complete&#34;) { window.setTimeout(function() { hljs.initHighlighting(); }, 0); } }  h1 { font-size: 34px; } h1.title { font-size: 38px; } h2 { font-size: 30px; } h3 { font-size: 24px; } h4 { font-size: 18px; } h5 { font-size: 16px; } h6 { font-size: 12px; } .</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>/blog/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/about/</guid>
+      <description>I am a Data Scientist and Politcal Scientist in Mannheim, Germany.
+Find my current CV here.
+Contact me at: lukasheck1@gmail.com</description>
     </item>
     
   </channel>
