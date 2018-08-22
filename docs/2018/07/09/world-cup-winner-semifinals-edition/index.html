@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.42.2" />
+
+
+<title>World Cup Winner - Semifinals Edition - Lukas Heck</title>
+<meta property="og:title" content="World Cup Winner - Semifinals Edition - Lukas Heck">
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.11.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/blog/css/fonts.css" media="all">
+<link rel="stylesheet" href="/blog/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/blog/" class="nav-logo">
+    <img src="/blog/images/lh.png"
+         width="50"
+         height="50"
+         alt="Lukas Heck">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="https://github.com/heck1/">GitHub</a></li>
+    
+    <li><a href="https://www.linkedin.com/in/lukasheck/">Linkedin</a></li>
+    
+    <li><a href="/blog/about/">Lukas Heck</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">4 min read</span>
+    
+
+    <h1 class="article-title">World Cup Winner - Semifinals Edition</h1>
+
+    
+    <span class="article-date">2018/07/09</span>
+    
+
+    <div class="article-content">
+      <p>Since Croatia beat Russia on Saturday, the Semifinals for this year’s World Cup are set:</p>
+<ul>
+<li>England</li>
+<li>Belgium</li>
+<li>France</li>
+<li>Croatia</li>
+</ul>
+<p>I wanted to see wether the variance in odds between bookmarkers allows to draw conclusions on who will actually win (of course, it most likely will not). Without further ado, here is the final plot:</p>
+<div class="figure">
+<img src="https://raw.githubusercontent.com/heck1/blog/master/static/images/prediction.png" />
+
+</div>
+<p>The y-Axis highlights the frequency of a given odd while the x-axis shows the probability of a given team taking the title home. As we can clearly see, France leads by a margin of over 5%. Belgium/England follow and Croatia is far behind.</p>
+<div id="scraping-soccer-odds-and-visualizing-the-results-aka-how-to-produce-the-plot" class="section level2">
+<h2>Scraping soccer odds and visualizing the results (aka how to produce the plot)</h2>
+<p>So, let’s get to it: I found a decent site for different betting sources here: <a href="https://www.wettfreunde.net/wm-2018-quoten/" class="uri">https://www.wettfreunde.net/wm-2018-quoten/</a>. Since the link luckily contains a html-table, scraping is rather arbitrary:</p>
+<pre class="r"><code>library(XML)
+library(RCurl)
+library(rlist)
+require(tidyverse)</code></pre>
+<pre class="r"><code>theurl &lt;- getURL(&quot;https://www.wettfreunde.net/wm-2018-quoten/&quot;,.opts = list(ssl.verifypeer = FALSE) )
+tables &lt;- readHTMLTable(theurl)
+tables &lt;- list.clean(tables, fun = is.null, recursive = FALSE)
+n.rows &lt;- unlist(lapply(tables, function(t) dim(t)[1:2]))
+tables &lt;- data.frame(tables)
+tab &lt;- tables</code></pre>
+<pre class="r"><code>head(tab)</code></pre>
+<pre><code>##      NULL.V1                   NULL.V2                 NULL.V3
+## 1                                                             
+## 2            + 150 € Bonuszum Anbieter + Wettbonuszum Anbieter
+## 3 Frankreich                      3,00                    3,00
+## 4    Belgien                      4,00                    3,75
+## 5    England                      3,70                    3,75
+## 6   Kroatien                      4,50                    5,00
+##                     NULL.V4                   NULL.V5
+## 1                                                    
+## 2 + 100 € Bonuszum Anbieter + 100 € Bonuszum Anbieter
+## 3                      2,90                      3,00
+## 4                      3,70                      3,75
+## 5                      3,50                      3,50
+## 6                      5,50                      5,50
+##                     NULL.V6
+## 1                          
+## 2 + 100 € Bonuszum Anbieter
+## 3                      3,00
+## 4                      3,75
+## 5                      3,50
+## 6                      5,50</code></pre>
+<p>Okay, so far, so good. Next, some cleanup:</p>
+<pre class="r"><code>tab &lt;- tab[3:nrow(tab),]
+colnames(tab) &lt;- c(&quot;Team&quot;, &quot;interwetten&quot;,  &quot;bet365&quot;, &quot;tipico&quot;,  &quot;betfair&quot;, &quot;unibet&quot;)
+tab$Team &lt;- as.character(tab$Team)
+team_en &lt;- c(&quot;France&quot;, &quot;Belgium&quot;, &quot;England&quot;, &quot;Croatia&quot;)
+tab$Team &lt;- team_en
+head(tab)</code></pre>
+<pre><code>##      Team interwetten bet365 tipico betfair unibet
+## 3  France        3,00   3,00   2,90    3,00   3,00
+## 4 Belgium        4,00   3,75   3,70    3,75   3,75
+## 5 England        3,70   3,75   3,50    3,50   3,50
+## 6 Croatia        4,50   5,00   5,50    5,50   5,50</code></pre>
+<p>We can see that there is a little variance in the odds. Next, we calculate the percentage of any team winning the World Cup by</p>
+<blockquote>
+<p>(1 / odd) * 100</p>
+</blockquote>
+<pre class="r"><code>calculate_probs &lt;- function(bookmarkers){
+  bookmarkers &lt;- 1/as.numeric(str_replace_all(bookmarkers, &quot;,&quot;, &quot;.&quot;)) * 100
+}
+
+for(i in (colnames(tab[,2:ncol(tab)]))) {
+  tab[[i]] &lt;- calculate_probs(tab[[i]])
+  
+}
+head(tab)</code></pre>
+<pre><code>##      Team interwetten   bet365   tipico  betfair   unibet
+## 3  France    33.33333 33.33333 34.48276 33.33333 33.33333
+## 4 Belgium    25.00000 26.66667 27.02703 26.66667 26.66667
+## 5 England    27.02703 26.66667 28.57143 28.57143 28.57143
+## 6 Croatia    22.22222 20.00000 18.18182 18.18182 18.18182</code></pre>
+<p>Looks better! Next, we visualize the result and combine the odds into a single dataframe:</p>
+<pre class="r"><code>tab$Game &lt;- NULL
+tab$diff &lt;- NULL
+tab$rowvar &lt;- NULL
+diff &lt;-  rowMeans(tab[,-1])
+rowvar &lt;- apply(tab[,-1], 1, var) 
+
+tab$dv &lt;- ( (rowvar /  diff)) * 100
+
+dat &lt;- tab
+colnames(dat) &lt;- 0
+new_df &lt;- dat[,1:2]
+colnames(new_df) &lt;- 0
+
+for (i in 3:6){ 
+  cols &lt;- c(1, i)
+  dat[,cols]
+  new_df &lt;- rbind(new_df, dat[,cols])
+}
+
+
+row.names(dat) &lt;- dat$Team
+
+
+colnames(new_df) &lt;- c(&quot;Team&quot;, &quot;probs&quot;)
+new_df</code></pre>
+<pre><code>##       Team    probs
+## 3   France 33.33333
+## 4  Belgium 25.00000
+## 5  England 27.02703
+## 6  Croatia 22.22222
+## 31  France 33.33333
+## 41 Belgium 26.66667
+## 51 England 26.66667
+## 61 Croatia 20.00000
+## 32  France 34.48276
+## 42 Belgium 27.02703
+## 52 England 28.57143
+## 62 Croatia 18.18182
+## 33  France 33.33333
+## 43 Belgium 26.66667
+## 53 England 28.57143
+## 63 Croatia 18.18182
+## 34  France 33.33333
+## 44 Belgium 26.66667
+## 54 England 28.57143
+## 64 Croatia 18.18182</code></pre>
+<p>The final step is vizualistation: Create a density plot with good old <code>ggplot2</code>.</p>
+<pre class="r"><code>ggplot(new_df, aes(x = new_df$probs , fill = new_df$Team)) + 
+  geom_density(alpha = 1) +
+  labs(title = &quot;World Champion Predictions&quot;, x = &quot;Probabilities&quot;, y = &quot;Frequency of Odds&quot;,
+       fill = &quot;Champion&quot;) </code></pre>
+<p><img src="/blog/post/2018-07-09-world-cup-winner-semifinals-edition_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Hope you enjoyed my first entry, you can find the replication code for this post <a href="https://gist.github.com/heck1/df165d3b9f3f177133be4c6bd0fd6f0f">here</a>.</p>
+</div>
+
+    </div>
+  </article>
+
+  
+<section id="comments">
+  <div id="disqus_thread"></div>
+  <script>
+  var disqus_config = function () {
+  
+  };
+  (function() {
+    var inIFrame = function() {
+      var iframe = true;
+      try { iframe = window.self !== window.top; } catch (e) {}
+      return iframe;
+    };
+    if (inIFrame()) return;
+    var d = document, s = d.createElement('script');
+    s.src = '//Lukas Heck.disqus.com/embed.js'; s.async = true;
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/blog/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/blog/images/hugo-logo.png" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/blog/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-121885797-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+  </body>
+</html>
+

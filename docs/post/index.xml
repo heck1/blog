@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Lukas Heck</title>
+    <link>/blog/post/</link>
+    <description>Recent content in Posts on Lukas Heck</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 14 Jul 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/blog/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>World Cup Winner - Finals Edition</title>
+      <link>/blog/2018/07/14/world-cup-winner-finalsedition/</link>
+      <pubDate>Sat, 14 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2018/07/14/world-cup-winner-finalsedition/</guid>
+      <description>Like promised, here is the updated plot after the finals:
+ As it turns out, France is the clear favorite to win the World Cup tomorrow. On average, the probability of France winning is around 70% and for Croatia, the underdog, the probability based on the odds is around 30%.
+If you want to know more, see my original blog post.
+Good luck to both teams tomorrow :)</description>
+    </item>
+    
+    <item>
+      <title>Hello World!</title>
+      <link>/blog/2018/07/09/hello-world/</link>
+      <pubDate>Mon, 09 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2018/07/09/hello-world/</guid>
+      <description>Yay! I managed to deploy my first Data Science related blog. I will regularly update this blog with new R-based analysis, visualizations and my thoughts on stuff. Stay tuned!
+This blog is powered by RMarkdown, hosted on GitHub and currently runs on the amazing Lithium Theme for Hugo. I followed this very thorough tutorial and it was definitively worth it!</description>
+    </item>
+    
+    <item>
+      <title>World Cup Winner - Semifinals Edition</title>
+      <link>/blog/2018/07/09/world-cup-winner-semifinals-edition/</link>
+      <pubDate>Mon, 09 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2018/07/09/world-cup-winner-semifinals-edition/</guid>
+      <description>Since Croatia beat Russia on Saturday, the Semifinals for this year’s World Cup are set:
+ England Belgium France Croatia  I wanted to see wether the variance in odds between bookmarkers allows to draw conclusions on who will actually win (of course, it most likely will not). Without further ado, here is the final plot:
+ The y-Axis highlights the frequency of a given odd while the x-axis shows the probability of a given team taking the title home.</description>
+    </item>
+    
+  </channel>
+</rss>

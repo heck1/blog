@@ -13,7 +13,9 @@ tags:
 ---
 
 
-
+```{r setup, include=FALSE , echo=FALSE, message=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
 
 
 Since Croatia beat Russia on Saturday, the Semifinals for this year's World Cup are set:
@@ -36,13 +38,13 @@ Belgium/England follow and Croatia is far behind.
 So, let's get to it:
 I found a decent site for different betting sources here: <https://www.wettfreunde.net/wm-2018-quoten/>.
 Since the link luckily contains a html-table, scraping is rather arbitrary:
-```{  }
+```{r , message=FALSE }
 library(XML)
 library(RCurl)
 library(rlist)
 require(tidyverse)
 ```
-```{}
+```{r}
 theurl <- getURL("https://www.wettfreunde.net/wm-2018-quoten/",.opts = list(ssl.verifypeer = FALSE) )
 tables <- readHTMLTable(theurl)
 tables <- list.clean(tables, fun = is.null, recursive = FALSE)
@@ -51,12 +53,12 @@ tables <- data.frame(tables)
 tab <- tables
 ```
 
-```{  }
+```{r  }
 head(tab)
 ```
 
 Okay, so far, so good. Next, some cleanup: 
-```{}
+```{r}
 tab <- tab[3:nrow(tab),]
 colnames(tab) <- c("Team", "interwetten",  "bet365", "tipico",  "betfair", "unibet")
 tab$Team <- as.character(tab$Team)
@@ -70,7 +72,7 @@ any team winning the World Cup by
 
 >(1 / odd) * 100
 
-```{}
+```{r}
 calculate_probs <- function(bookmarkers){
   bookmarkers <- 1/as.numeric(str_replace_all(bookmarkers, ",", ".")) * 100
 }
@@ -84,7 +86,7 @@ head(tab)
 
 Looks better! Next, we visualize the result and combine the odds into a single dataframe:
 
-```{}
+```{r}
 tab$Game <- NULL
 tab$diff <- NULL
 tab$rowvar <- NULL
@@ -114,7 +116,7 @@ new_df
 
 The final step is vizualistation: Create a density plot with good old `ggplot2`.
 
-```{}
+```{r}
 ggplot(new_df, aes(x = new_df$probs , fill = new_df$Team)) + 
   geom_density(alpha = 1) +
   labs(title = "World Champion Predictions", x = "Probabilities", y = "Frequency of Odds",
