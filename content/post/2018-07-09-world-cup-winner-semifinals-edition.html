@@ -30,56 +30,26 @@ tags:
 <p>The y-Axis highlights the frequency of a given odd while the x-axis shows the probability of a given team taking the title home. As we can clearly see, France leads by a margin of over 5%. Belgium/England follow and Croatia is far behind.</p>
 <div id="scraping-soccer-odds-and-visualizing-the-results-aka-how-to-produce-the-plot" class="section level2">
 <h2>Scraping soccer odds and visualizing the results (aka how to produce the plot)</h2>
-<p>So, let’s get to it: I found a decent site for different betting sources here: <a href="https://www.wettfreunde.net/wm-2018-quoten/" class="uri">https://www.wettfreunde.net/wm-2018-quoten/</a>. Since the link luckily contains a html-table, scraping is rather arbitrary:</p>
-<pre class="r"><code>library(XML)
-library(RCurl)
-library(rlist)
-require(tidyverse)</code></pre>
-<pre class="r"><code>theurl &lt;- getURL(&quot;https://www.wettfreunde.net/wm-2018-quoten/&quot;,.opts = list(ssl.verifypeer = FALSE) )
+<p>So, let’s get to it: I found a decent site for different betting sources here: <a href="https://www.wettfreunde.net/wm-2018-quoten/" class="uri">https://www.wettfreunde.net/wm-2018-quoten/</a>. Since the link luckily contains a html-table, scraping is rather arbitrary: <code>{ , message=FALSE } library(XML) library(RCurl) library(rlist) require(tidyverse)</code></p>
+<pre><code>theurl &lt;- getURL(&quot;https://www.wettfreunde.net/wm-2018-quoten/&quot;,.opts = list(ssl.verifypeer = FALSE) )
 tables &lt;- readHTMLTable(theurl)
 tables &lt;- list.clean(tables, fun = is.null, recursive = FALSE)
 n.rows &lt;- unlist(lapply(tables, function(t) dim(t)[1:2]))
 tables &lt;- data.frame(tables)
 tab &lt;- tables</code></pre>
-<pre class="r"><code>head(tab)</code></pre>
-<pre><code>##      NULL.V1                   NULL.V2                 NULL.V3
-## 1                                                             
-## 2            + 150 € Bonuszum Anbieter + Wettbonuszum Anbieter
-## 3 Frankreich                      3,00                    3,00
-## 4    Belgien                      4,00                    3,75
-## 5    England                      3,70                    3,75
-## 6   Kroatien                      4,50                    5,00
-##                     NULL.V4                   NULL.V5
-## 1                                                    
-## 2 + 100 € Bonuszum Anbieter + 100 € Bonuszum Anbieter
-## 3                      2,90                      3,00
-## 4                      3,70                      3,75
-## 5                      3,50                      3,50
-## 6                      5,50                      5,50
-##                     NULL.V6
-## 1                          
-## 2 + 100 € Bonuszum Anbieter
-## 3                      3,00
-## 4                      3,75
-## 5                      3,50
-## 6                      5,50</code></pre>
+<pre><code>head(tab)</code></pre>
 <p>Okay, so far, so good. Next, some cleanup:</p>
-<pre class="r"><code>tab &lt;- tab[3:nrow(tab),]
+<pre><code>tab &lt;- tab[3:nrow(tab),]
 colnames(tab) &lt;- c(&quot;Team&quot;, &quot;interwetten&quot;,  &quot;bet365&quot;, &quot;tipico&quot;,  &quot;betfair&quot;, &quot;unibet&quot;)
 tab$Team &lt;- as.character(tab$Team)
 team_en &lt;- c(&quot;France&quot;, &quot;Belgium&quot;, &quot;England&quot;, &quot;Croatia&quot;)
 tab$Team &lt;- team_en
 head(tab)</code></pre>
-<pre><code>##      Team interwetten bet365 tipico betfair unibet
-## 3  France        3,00   3,00   2,90    3,00   3,00
-## 4 Belgium        4,00   3,75   3,70    3,75   3,75
-## 5 England        3,70   3,75   3,50    3,50   3,50
-## 6 Croatia        4,50   5,00   5,50    5,50   5,50</code></pre>
 <p>We can see that there is a little variance in the odds. Next, we calculate the percentage of any team winning the World Cup by</p>
 <blockquote>
 <p>(1 / odd) * 100</p>
 </blockquote>
-<pre class="r"><code>calculate_probs &lt;- function(bookmarkers){
+<pre><code>calculate_probs &lt;- function(bookmarkers){
   bookmarkers &lt;- 1/as.numeric(str_replace_all(bookmarkers, &quot;,&quot;, &quot;.&quot;)) * 100
 }
 
@@ -88,13 +58,8 @@ for(i in (colnames(tab[,2:ncol(tab)]))) {
   
 }
 head(tab)</code></pre>
-<pre><code>##      Team interwetten   bet365   tipico  betfair   unibet
-## 3  France    33.33333 33.33333 34.48276 33.33333 33.33333
-## 4 Belgium    25.00000 26.66667 27.02703 26.66667 26.66667
-## 5 England    27.02703 26.66667 28.57143 28.57143 28.57143
-## 6 Croatia    22.22222 20.00000 18.18182 18.18182 18.18182</code></pre>
 <p>Looks better! Next, we visualize the result and combine the odds into a single dataframe:</p>
-<pre class="r"><code>tab$Game &lt;- NULL
+<pre><code>tab$Game &lt;- NULL
 tab$diff &lt;- NULL
 tab$rowvar &lt;- NULL
 diff &lt;-  rowMeans(tab[,-1])
@@ -119,32 +84,10 @@ row.names(dat) &lt;- dat$Team
 
 colnames(new_df) &lt;- c(&quot;Team&quot;, &quot;probs&quot;)
 new_df</code></pre>
-<pre><code>##       Team    probs
-## 3   France 33.33333
-## 4  Belgium 25.00000
-## 5  England 27.02703
-## 6  Croatia 22.22222
-## 31  France 33.33333
-## 41 Belgium 26.66667
-## 51 England 26.66667
-## 61 Croatia 20.00000
-## 32  France 34.48276
-## 42 Belgium 27.02703
-## 52 England 28.57143
-## 62 Croatia 18.18182
-## 33  France 33.33333
-## 43 Belgium 26.66667
-## 53 England 28.57143
-## 63 Croatia 18.18182
-## 34  France 33.33333
-## 44 Belgium 26.66667
-## 54 England 28.57143
-## 64 Croatia 18.18182</code></pre>
 <p>The final step is vizualistation: Create a density plot with good old <code>ggplot2</code>.</p>
-<pre class="r"><code>ggplot(new_df, aes(x = new_df$probs , fill = new_df$Team)) + 
+<pre><code>ggplot(new_df, aes(x = new_df$probs , fill = new_df$Team)) + 
   geom_density(alpha = 1) +
   labs(title = &quot;World Champion Predictions&quot;, x = &quot;Probabilities&quot;, y = &quot;Frequency of Odds&quot;,
        fill = &quot;Champion&quot;) </code></pre>
-<p><img src="/blog/post/2018-07-09-world-cup-winner-semifinals-edition_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>Hope you enjoyed my first entry, you can find the replication code for this post <a href="https://gist.github.com/heck1/df165d3b9f3f177133be4c6bd0fd6f0f">here</a>.</p>
 </div>
