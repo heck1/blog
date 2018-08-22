@@ -38,7 +38,7 @@ Belgium/England follow and Croatia is far behind.
 So, let's get to it:
 I found a decent site for different betting sources here: <https://www.wettfreunde.net/wm-2018-quoten/>.
 Since the link luckily contains a html-table, scraping is rather arbitrary:
-```{ , message=FALSE }
+```{  }
 library(XML)
 library(RCurl)
 library(rlist)
