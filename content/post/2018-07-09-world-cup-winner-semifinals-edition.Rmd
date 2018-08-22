@@ -13,9 +13,7 @@ tags:
 ---
 
 
-```{r setup, include=FALSE , echo=FALSE, message=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+
 
 
 Since Croatia beat Russia on Saturday, the Semifinals for this year's World Cup are set:
