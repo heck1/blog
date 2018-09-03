@@ -3,7 +3,7 @@ title: Analysing Movie Genre Popularity with imdb Data
 author: Lukas Heck
 date: '2018-09-03'
 slug: imdb-movie-analysis
-categories: [R] [webscraping]
+categories: [R]
 tags:
   - rstats
   - r
@@ -11,6 +11,8 @@ tags:
   - ggplot2
   - visuzalisation
 ---
+
+When it comes to 
 
 
 ![](https://raw.githubusercontent.com/heck1/blog/master/static/images/winner.png)
