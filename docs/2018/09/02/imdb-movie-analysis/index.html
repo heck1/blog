@@ -69,27 +69,33 @@
     
 
     <div class="article-content">
-      <div class="figure">
-<img src="https://raw.githubusercontent.com/heck1/blog/master/static/images/imdb2.png" />
+      <p><img src="https://raw.githubusercontent.com/heck1/blog/master/static/images/imdb2.png" alt="" /></p>
 
-</div>
-<p>When it comes to hobbies, films and listening to podcasts / youtube videos of people talking about films is one of my favorites. For a while now, I was interested in approaching this hobby in a data-driven manner. I stumbled upon[this old rStudio blog post])<a href="https://blog.rstudio.com/2014/11/24/rvest-easy-web-scraping-with-r/" class="uri">https://blog.rstudio.com/2014/11/24/rvest-easy-web-scraping-with-r/</a>) by none other than Hadley Wickham himself.</p>
-<p>After reading it, I wanted to try web-scraping with selectorgadget myself and imdb seemed like a great place to start. I followed these questions: – how to extract data efficiently from imdb directly? – how can this information be used in a informative manner? – how can the selectorgadget-html output be easily understood?</p>
+<p>When it comes to hobbies, films and listening to podcasts / youtube videos of people talking about films is one of my favorites. For a while now, I was interested in approaching this hobby in a
+data-driven manner. I stumbled upon[this old rStudio blog post])<a href="https://blog.rstudio.com/2014/11/24/rvest-easy-web-scraping-with-r/)">https://blog.rstudio.com/2014/11/24/rvest-easy-web-scraping-with-r/)</a> by none other than Hadley Wickham himself.</p>
+
+<p>After reading it, I wanted to try web-scraping with selectorgadget myself and imdb seemed
+like a great place to start. I followed these questions:
+&ndash; how to extract data efficiently from imdb directly?
+&ndash; how can this information be used in a informative manner?
+&ndash; how can the selectorgadget-html output be easily understood?</p>
+
 <p>After some time struggeling with exploring the selectorgadget-output, but <a href="https://rstudio-pubs-static.s3.amazonaws.com/266430_f3fd4660b2744751ab144aa130768a06.html">yet another blogpost</a> was very helpful in helping to manage the basics. After a few attempts and some cleanup, I ended with:</p>
-<pre message="FALSE"><code>
+
+<pre><code class="language-message=FALSE">
 library(rvest)
 library(ROAuth)
 library(tidyverse)
 
 
-url &lt;- &#39;https://www.imdb.com/search/title?count=100&amp;release_date=1977,1977&amp;title_type=feature&amp;sort=moviemeter,asc&#39;
+url &lt;- 'https://www.imdb.com/search/title?count=100&amp;release_date=1977,1977&amp;title_type=feature&amp;sort=moviemeter,asc'
 
 # read html
 
 imdb &lt;- read_html(url)
 
-genre_data_html &lt;- html_nodes(imdb,&#39;.genre&#39;)
-title_data_html &lt;- html_nodes(imdb,&#39;.lister-item-header a&#39;)
+genre_data_html &lt;- html_nodes(imdb,'.genre')
+title_data_html &lt;- html_nodes(imdb,'.lister-item-header a')
 title_data &lt;- html_text(title_data_html)
 genre_data &lt;- html_text(genre_data_html)
                 
@@ -105,20 +111,29 @@ genre_data&lt;-gsub(&quot;,.*&quot;,&quot;&quot;,genre_data)
                 
 genre_data&lt;-as.character(genre_data)
 title_data&lt;-as.character(title_data)
+
 </code></pre>
+
 <pre><code> head(genre_data)
-[1] &quot;Action&quot;    &quot;Drama&quot;     &quot;Action&quot;    &quot;Comedy&quot;    &quot;Drama&quot;     &quot;Animation&quot;</code></pre>
+[1] &quot;Action&quot;    &quot;Drama&quot;     &quot;Action&quot;    &quot;Comedy&quot;    &quot;Drama&quot;     &quot;Animation&quot;
+</code></pre>
+
 <pre><code>head(title_data)
 [1] &quot;KriegderSterne&quot;                    &quot;UnheimlicheBegegnungderdrittenArt&quot;
 [3] &quot;EinausgekochtesSchlitzohr&quot;         &quot;DerUntermieter&quot;                   
-[5] &quot;NurSamstagNacht&quot;                   &quot;BernardundBianca-DieMäusepolizei&quot; </code></pre>
-<p>So we can determine that in 1977, the year the first Star Wars movie came out, it was actually the most popular movie, followed by <a href="https://www.imdb.com/title/tt0075860/?ref_=adv_li_tt">Close Encounters of the Third Kind</a>. My first instinct was, okay, now I can create a chart for the popularity of a genre in a given year. But how can this be utilized further? Here is what I came up with:</p>
+[5] &quot;NurSamstagNacht&quot;                   &quot;BernardundBianca-DieMäusepolizei&quot; 
+</code></pre>
+
+<p>So we can determine that in 1977, the year the first Star Wars movie came out, it was actually the most popular movie, followed by <a href="https://www.imdb.com/title/tt0075860/?ref_=adv_li_tt">Close Encounters of the Third Kind</a>.
+My first instinct was, okay, now I can create a chart for the popularity of a genre in a given year.
+But how can this be utilized further? Here is what I came up with:</p>
+
 <pre><code>yearly_fin &lt;- data.frame()
 for (y in (1960:2018)){
   url &lt;- paste0(&quot;https://www.imdb.com/search/title?count=100&amp;release_date=&quot;,y,&quot;,&quot;,y,&quot;&amp;title_type=feature&amp;sort=boxoffice_gross_us,asc&quot;)
                 imdb &lt;- read_html(url)
-                genre_data_html &lt;- html_nodes(imdb,&#39;.genre&#39;)
-                title_data_html &lt;- html_nodes(imdb,&#39;.lister-item-header a&#39;)
+                genre_data_html &lt;- html_nodes(imdb,'.genre')
+                title_data_html &lt;- html_nodes(imdb,'.lister-item-header a')
                 title_data &lt;- html_text(title_data_html)
                 genre_data &lt;- html_text(genre_data_html)
                 
@@ -144,14 +159,18 @@ if(length(genre_data) &lt; 100){
                 yearly_data$year &lt;- y
                 yearly_fin &lt;- rbind(yearly_fin, yearly_data)
   print(y)
-}</code></pre>
-<p>By just looping over the years in the underlying url, one can scrape the complete time-frame on a yearly basis in around 3 minutes (depending on your internet connection). Then, I used the output of <code>yearly_fin</code> to create this plot:</p>
-<div class="figure">
-<img src="https://raw.githubusercontent.com/heck1/blog/master/static/images/imdb2.png" />
+}
+</code></pre>
 
-</div>
-<p>As we can see, for example <em>Horror</em> was really popular in the 80s,hen vanished in the beginning of the 90s and came back in the early 2000s.</p>
-<p>Further information about the scraping process can be found in the complete code <a href="https://gist.github.com/heck1/6e69e87bf277fb12789ddfe202ba8670">here</a>. What is next? Well, apart from this analysis barely scratching the surface of what is actually possible with rvest and the imdb-data in current form, I also was able to find the short description imdb uses in their rankings (<code>html_nodes(imdb,'.lister-item-header a'</code> ), which should provide useful for an text-based prediction on a film`s popularity or (expexted?) gross.</p>
+<p>By just looping over the years in the underlying url, one can scrape the complete time-frame on a yearly basis in around 3 minutes (depending on your internet connection). Then, I used the output of
+<code>yearly_fin</code> to create this plot:</p>
+
+<p><img src="https://raw.githubusercontent.com/heck1/blog/master/static/images/imdb2.png" alt="" />{
+width=80% }
+As we can see, for example <em>Horror</em> was really popular in the 80s,hen vanished in the beginning of the 90s and came back in the early 2000s.</p>
+
+<p>Further information about the scraping process can be found in the complete code <a href="https://gist.github.com/heck1/6e69e87bf277fb12789ddfe202ba8670">here</a>.
+What is next? Well, apart from this analysis barely scratching the surface of what is actually possible with rvest and the imdb-data in current form, I also was able to find the short description imdb uses in their rankings (<code>html_nodes(imdb,'.lister-item-header a'</code> ), which should provide useful for an text-based prediction on a film`s popularity or (expexted?) gross.</p>
 
     </div>
   </article>
