@@ -16,7 +16,7 @@ tags:
 
 
 <div class="figure">
-<img src="https://raw.githubusercontent.com/heck1/blog/master/static/images/imdb2.png" />
+<img src="https://raw.githubusercontent.com/heck1/blog/master/static/images/imdb2.png" style="width:65.0%" />
 
 </div>
 <p>When it comes to hobbies, films and listening to podcasts / youtube videos of people talking about films is one of my favorites. For a while now, I was interested in approaching this hobby in a data-driven manner. I stumbled upon[this old rStudio blog post])<a href="https://blog.rstudio.com/2014/11/24/rvest-easy-web-scraping-with-r/" class="uri">https://blog.rstudio.com/2014/11/24/rvest-easy-web-scraping-with-r/</a>) by none other than Hadley Wickham himself.</p>
@@ -92,5 +92,5 @@ if(length(genre_data) &lt; 100){
   print(y)
 }</code></pre>
 <p>By just looping over the years in the underlying url, one can scrape the complete time-frame on a yearly basis in around 3 minutes (depending on your internet connection). Then, I used the output of <code>yearly_fin</code> to create this plot:</p>
-<p><img src="https://raw.githubusercontent.com/heck1/blog/master/static/images/imdb2.png" style="width:80.0%" /> As we can see, for example <em>Horror</em> was really popular in the 80s,hen vanished in the beginning of the 90s and came back in the early 2000s.</p>
+<p><img src="https://raw.githubusercontent.com/heck1/blog/master/static/images/imdb2.png" style="width:65.0%" /> As we can see, for example <em>Horror</em> was really popular in the 80s,hen vanished in the beginning of the 90s and came back in the early 2000s.</p>
 <p>Further information about the scraping process can be found in the complete code <a href="https://gist.github.com/heck1/6e69e87bf277fb12789ddfe202ba8670">here</a>. What is next? Well, apart from this analysis barely scratching the surface of what is actually possible with rvest and the imdb-data in current form, I also was able to find the short description imdb uses in their rankings (<code>html_nodes(imdb,'.lister-item-header a'</code> ), which should provide useful for an text-based prediction on a film`s popularity or (expexted?) gross.</p>

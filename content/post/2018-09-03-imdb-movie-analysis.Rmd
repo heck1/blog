@@ -11,8 +11,8 @@ tags:
   - ggplot2
   - visuzalisation
 ---
-![](https://raw.githubusercontent.com/heck1/blog/master/static/images/imdb2.png)
-
+![](https://raw.githubusercontent.com/heck1/blog/master/static/images/imdb2.png){
+width=65% }
 
 
 When it comes to hobbies, films and listening to podcasts / youtube videos of people talking about films is one of my favorites. For a while now, I was interested in approaching this hobby in a 
@@ -116,7 +116,7 @@ By just looping over the years in the underlying url, one can scrape the complet
 ```yearly_fin``` to create this plot:
 
 ![](https://raw.githubusercontent.com/heck1/blog/master/static/images/imdb2.png){
-width=80% }
+width=65% }
 As we can see, for example _Horror_ was really popular in the 80s,hen vanished in the beginning of the 90s and came back in the early 2000s.
 
 Further information about the scraping process can be found in the complete code [here](https://gist.github.com/heck1/6e69e87bf277fb12789ddfe202ba8670). 
