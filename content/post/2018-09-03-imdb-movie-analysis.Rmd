@@ -114,8 +114,8 @@ if(length(genre_data) < 100){
 
 By just looping over the years in the underlying url, one can scrape the complete time-frame on a yearly basis in around 3 minutes (depending on your internet connection). Then, I used the output of
 ```yearly_fin``` to create this plot:
-
-![](https://raw.githubusercontent.com/heck1/blog/master/static/images/imdb2.png){
+[click here for the full-size](https://raw.githubusercontent.com/heck1/blog/master/static/images/imdb2.png)
+![click](https://raw.githubusercontent.com/heck1/blog/master/static/images/imdb2.png){
 width=85% }
 As we can see, for example _Horror_ was really popular in the 80s,hen vanished in the beginning of the 90s and came back in the early 2000s.
 
