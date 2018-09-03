@@ -6,10 +6,21 @@
     <description>Recent content in R on Lukas Heck</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 14 Jul 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 03 Sep 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/blog/categories/r/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Analysing Movie Genre Popularity with imdb Data</title>
+      <link>/blog/2018/09/03/imdb-movie-analysis/</link>
+      <pubDate>Mon, 03 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2018/09/03/imdb-movie-analysis/</guid>
+      <description>When it comes to
+ my original blog post.
+Good luck to both teams tomorrow :)</description>
+    </item>
     
     <item>
       <title>World Cup Winner - Finals Edition</title>

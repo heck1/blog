@@ -17,9 +17,7 @@ When it comes to
 
 ![](https://raw.githubusercontent.com/heck1/blog/master/static/images/winner.png)
 
-As it turns out, France is the clear favorite to win the World Cup tomorrow. On average, the probability of France winning is around 70% and for Croatia, the underdog, the probability based on the odds is around 30%. 
-
-If you want to know more, see my [original blog post](https://heck1.github.io/blog/2018/07/09/world-cup-winner-semifinals-edition/).
+my [original blog post](https://heck1.github.io/blog/2018/07/09/world-cup-winner-semifinals-edition/).
 
 Good luck to both teams tomorrow :)
 
