@@ -49,6 +49,8 @@
     
     <li><a href="/blog/about/">Lukas Heck</a></li>
     
+    <li><a href="https://stackoverflow.com/users/9294787/heck1">StackOverflow</a></li>
+    
   </ul>
 </nav>
 
@@ -145,7 +147,7 @@ if(length(genre_data) &lt; 100){
                 yearly_fin &lt;- rbind(yearly_fin, yearly_data)
   print(y)
 }</code></pre>
-<p>By just looping over the years in the underlying url, one can scrape the complete time-frame on a yearly basis in around 3 minutes (depending on your internet connection). Then, I used the output of <code>yearly_fin</code> to create this plot: <a href="https://raw.githubusercontent.com/heck1/blog/master/static/images/imdb2.png">click here</a> <img src="https://raw.githubusercontent.com/heck1/blog/master/static/images/imdb2.png" alt="click" style="width:85.0%" /> As we can see, for example <em>Horror</em> was really popular in the 80s,hen vanished in the beginning of the 90s and came back in the early 2000s.</p>
+<p>By just looping over the years in the underlying url, one can scrape the complete time-frame on a yearly basis in around 3 minutes (depending on your internet connection). Then, I used the output of <code>yearly_fin</code> to create this plot: <a href="https://raw.githubusercontent.com/heck1/blog/master/static/images/imdb2.png">click here for the full-size</a> <img src="https://raw.githubusercontent.com/heck1/blog/master/static/images/imdb2.png" alt="click" style="width:85.0%" /> As we can see, for example <em>Horror</em> was really popular in the 80s,hen vanished in the beginning of the 90s and came back in the early 2000s.</p>
 <p>Further information about the scraping process can be found in the complete code <a href="https://gist.github.com/heck1/6e69e87bf277fb12789ddfe202ba8670">here</a>. What is next? Well, apart from this analysis barely scratching the surface of what is actually possible with rvest and the imdb-data in current form, I also was able to find the short description imdb uses in their rankings (<code>html_nodes(imdb,'.lister-item-header a'</code> ), which should provide useful for an text-based prediction on a film`s popularity or (expexted?) gross.</p>
 
     </div>
