@@ -3,13 +3,13 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/blog/2019/09/02/imdb-movie-analysis/</loc>
-    <lastmod>2019-09-02T00:00:00+00:00</lastmod>
+    <loc>/blog/2019/09/09/hello-world/</loc>
+    <lastmod>2019-09-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/blog/2019/07/09/hello-world/</loc>
-    <lastmod>2019-07-09T00:00:00+00:00</lastmod>
+    <loc>/blog/2019/09/02/imdb-movie-analysis/</loc>
+    <lastmod>2019-09-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -54,30 +54,30 @@
   
   <url>
     <loc>/blog/</loc>
-    <lastmod>2019-09-02T00:00:00+00:00</lastmod>
+    <lastmod>2019-09-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/blog/categories/misc/</loc>
-    <lastmod>2019-07-09T00:00:00+00:00</lastmod>
+    <lastmod>2019-09-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/blog/post/</loc>
+    <lastmod>2019-09-09T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/blog/tags/r/</loc>
     <lastmod>2019-09-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/blog/categories/r/</loc>
-    <lastmod>2019-09-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/blog/tags/r/</loc>
     <lastmod>2019-09-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>

@@ -1,0 +1,17 @@
+---
+title: Hello World!
+author: Lukas Heck
+date: '2019-09-09'
+slug: hello-world
+categories:
+  - Misc
+tags: []
+---
+
+
+Yay! I managed to deploy my first Data Science related blog. I will regularly update this blog with new R-based analysis, visualizations and my thoughts on stuff. Stay tuned!
+
+This blog is powered by RMarkdown, hosted on GitHub and currently runs on the amazing [Lithium Theme for Hugo](https://themes.gohugo.io/hugo-lithium-theme/). I followed [this](https://aurora-mareviv.github.io/talesofr/2018/02/r-blogdown-setup-in-github-2/) very thorough tutorial and it was definitively worth it!
+
+
+
