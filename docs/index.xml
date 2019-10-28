@@ -6,19 +6,39 @@
     <description>Recent content on Lukas Heck</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 02 Sep 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 02 Sep 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Analysing Movie Genre Popularity with imdb Data</title>
-      <link>/blog/2018/09/02/imdb-movie-analysis/</link>
-      <pubDate>Sun, 02 Sep 2018 00:00:00 +0000</pubDate>
+      <link>/blog/2019/09/02/imdb-movie-analysis/</link>
+      <pubDate>Mon, 02 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/09/02/imdb-movie-analysis/</guid>
+      <guid>/blog/2019/09/02/imdb-movie-analysis/</guid>
       <description>When it comes to hobbies, films and listening to podcasts / youtube videos of people talking about films is one of my favorites. For a while now, I was interested in approaching this hobby in a data-driven manner. I stumbled upon[this old rStudio blog post])https://blog.rstudio.com/2014/11/24/rvest-easy-web-scraping-with-r/) by none other than Hadley Wickham himself.
 After reading it, I wanted to try web-scraping with selectorgadget myself and imdb seemed like a great place to start.</description>
+    </item>
+    
+    <item>
+      <title>Hello World!</title>
+      <link>/blog/2019/07/09/hello-world/</link>
+      <pubDate>Tue, 09 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2019/07/09/hello-world/</guid>
+      <description>Yay! I managed to deploy my first Data Science related blog. I will regularly update this blog with new R-based analysis, visualizations and my thoughts on stuff. Stay tuned!
+This blog is powered by RMarkdown, hosted on GitHub and currently runs on the amazing Lithium Theme for Hugo. I followed this very thorough tutorial and it was definitively worth it!</description>
+    </item>
+    
+    <item>
+      <title>Hello World!</title>
+      <link>/blog/2019/07/09/hello-world/</link>
+      <pubDate>Tue, 09 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2019/07/09/hello-world/</guid>
+      <description>Yay! I managed to deploy my first Data Science related blog. I will regularly update this blog with new R-based analysis, visualizations and my thoughts on stuff. Stay tuned!
+This blog is powered by RMarkdown, hosted on GitHub and currently runs on the amazing Lithium Theme for Hugo. I followed this very thorough tutorial and it was definitively worth it!</description>
     </item>
     
     <item>
@@ -31,16 +51,6 @@ After reading it, I wanted to try web-scraping with selectorgadget myself and im
  As it turns out, France is the clear favorite to win the World Cup tomorrow. On average, the probability of France winning is around 70% and for Croatia, the underdog, the probability based on the odds is around 30%.
 If you want to know more, see my original blog post.
 Good luck to both teams tomorrow :)</description>
-    </item>
-    
-    <item>
-      <title>Hello World!</title>
-      <link>/blog/2018/07/09/hello-world/</link>
-      <pubDate>Mon, 09 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/2018/07/09/hello-world/</guid>
-      <description>Yay! I managed to deploy my first Data Science related blog. I will regularly update this blog with new R-based analysis, visualizations and my thoughts on stuff. Stay tuned!
-This blog is powered by RMarkdown, hosted on GitHub and currently runs on the amazing Lithium Theme for Hugo. I followed this very thorough tutorial and it was definitively worth it!</description>
     </item>
     
     <item>

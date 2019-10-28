@@ -1,21 +1,77 @@
----
-draft: yes
-title: Analysing Movie Genre Popularity with imdb Data
-author: Lukas Heck
-date: '2018-09-02'
-slug: imdb-movie-analysis
-categories: [R]
-tags:
-  - rstats
-  - r
-  - data
-  - ggplot2
-  - visuzalisation
----
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.42.2" />
+
+
+<title>Analysing Movie Genre Popularity with imdb Data - Lukas Heck</title>
+<meta property="og:title" content="Analysing Movie Genre Popularity with imdb Data - Lukas Heck">
 
 
 
-<div class="figure">
+  
+
+
+
+
+
+
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.11.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/blog/css/fonts.css" media="all">
+<link rel="stylesheet" href="/blog/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/blog/" class="nav-logo">
+    <img src="/blog/images/lh.png"
+         width="50"
+         height="50"
+         alt="Lukas Heck">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/blog/about/">Lukas Heck</a></li>
+    
+    <li><a href="https://github.com/heck1/">GitHub</a></li>
+    
+    <li><a href="https://www.linkedin.com/in/lukasheck/">Linkedin</a></li>
+    
+    <li><a href="https://stackoverflow.com/users/9294787/heck1">StackOverflow</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">3 min read</span>
+    
+
+    <h1 class="article-title">Analysing Movie Genre Popularity with imdb Data</h1>
+
+    
+    <span class="article-date">2019/09/02</span>
+    
+
+    <div class="article-content">
+      <div class="figure">
 <img src="https://raw.githubusercontent.com/heck1/blog/master/static/images/imdb2.png" style="width:85.0%" />
 
 </div>
@@ -93,3 +149,82 @@ if(length(genre_data) &lt; 100){
 }</code></pre>
 <p>By just looping over the years in the underlying url, one can scrape the complete time-frame on a yearly basis in around 3 minutes (depending on your internet connection). Then, I used the output of <code>yearly_fin</code> to create this plot: <a href="https://raw.githubusercontent.com/heck1/blog/master/static/images/imdb2.png">click here for the full-size</a> <img src="https://raw.githubusercontent.com/heck1/blog/master/static/images/imdb2.png" alt="click" style="width:85.0%" /> As we can see, for example <em>Horror</em> was really popular in the 80s,hen vanished in the beginning of the 90s and came back in the early 2000s.</p>
 <p>Further information about the scraping process can be found in the complete code <a href="https://gist.github.com/heck1/6e69e87bf277fb12789ddfe202ba8670">here</a>. What is next? Well, apart from this analysis barely scratching the surface of what is actually possible with rvest and the imdb-data in current form, I also was able to find the short description imdb uses in their rankings (<code>html_nodes(imdb,'.lister-item-header a'</code> ), which should provide useful for an text-based prediction on a film`s popularity or (expexted?) gross.</p>
+
+    </div>
+  </article>
+
+  
+<section id="comments">
+  <div id="disqus_thread"></div>
+  <script>
+  var disqus_config = function () {
+  
+  };
+  (function() {
+    var inIFrame = function() {
+      var iframe = true;
+      try { iframe = window.self !== window.top; } catch (e) {}
+      return iframe;
+    };
+    if (inIFrame()) return;
+    var d = document, s = d.createElement('script');
+    s.src = '//Lukas Heck.disqus.com/embed.js'; s.async = true;
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/blog/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/blog/images/hugo-logo.png" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/blog/js/math-code.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-121885797-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+  </body>
+</html>
+

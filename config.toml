@@ -2,7 +2,10 @@ baseurl = "https://heck1.github.io/blog/"
 publishDir = "docs"
 languageCode = "en-us"
 title = "Lukas Heck"
-theme = "hugo-lithium"
+
+theme = "Hugo-lithium"
+
+
 googleAnalytics = "UA-121885797-1"
 disqusShortname = "Lukas Heck"
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
@@ -14,16 +17,23 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     name = "Lukas Heck"
     url = "/about/"
     weight = 1
+  pre = "<i class=\"sidebar-button-icon fa fa-lg fa-question\"></i>"
+
 
 [[menu.main]]
     name = "GitHub"
     url = "https://github.com/heck1/"
+  pre = "<i class=\"sidebar-button-icon fa fa-lg fa-github\"></i>"
+
 [[menu.main]]
     name = "Linkedin"
     url = "https://www.linkedin.com/in/lukasheck/"
+
 [[menu.main]]
     name = "StackOverflow"
     url = "https://stackoverflow.com/users/9294787/heck1"
+  pre = "<i class=\"sidebar-button-icon fa fa-lg fa-stack-overflow\"></i>"
+
 
 [params]
     description = "Lukas Heck - Data Analyst and Political Scientist"
@@ -44,4 +54,3 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
   width = 50
     height = 50
     alt = "Lukas Heck"
-
