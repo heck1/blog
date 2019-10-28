@@ -16,7 +16,7 @@ width=85% }
 
 
 When it comes to hobbies, films and listening to podcasts / youtube videos of people talking about films is one of my favorites. For a while now, I was interested in approaching this hobby in a 
-data-driven manner. I stumbled upon[this old rStudio blog post])https://blog.rstudio.com/2014/11/24/rvest-easy-web-scraping-with-r/) by none other than Hadley Wickham himself. 
+data-driven manner. I stumbled upon [this old rStudio blog post](https://blog.rstudio.com/2014/11/24/rvest-easy-web-scraping-with-r/) by none other than Hadley Wickham himself. 
 
 After reading it, I wanted to try web-scraping with selectorgadget myself and imdb seemed 
 like a great place to start. I followed these questions:

@@ -17,7 +17,7 @@
       <pubDate>Mon, 02 Sep 2019 00:00:00 +0000</pubDate>
       
       <guid>/blog/2019/09/02/imdb-movie-analysis/</guid>
-      <description>When it comes to hobbies, films and listening to podcasts / youtube videos of people talking about films is one of my favorites. For a while now, I was interested in approaching this hobby in a data-driven manner. I stumbled upon[this old rStudio blog post])https://blog.rstudio.com/2014/11/24/rvest-easy-web-scraping-with-r/) by none other than Hadley Wickham himself.
+      <description>When it comes to hobbies, films and listening to podcasts / youtube videos of people talking about films is one of my favorites. For a while now, I was interested in approaching this hobby in a data-driven manner. I stumbled upon this old rStudio blog post by none other than Hadley Wickham himself.
 After reading it, I wanted to try web-scraping with selectorgadget myself and imdb seemed like a great place to start.</description>
     </item>
     
