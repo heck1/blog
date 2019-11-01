@@ -1,0 +1,130 @@
+---
+title: World Cup Winner - Semifinals Edition
+author: Lukas Heck
+date: '2018-07-09'
+slug: world-cup-winner-semifinals-edition
+categories: []
+tags:
+  - rstats
+  - r
+  - data
+  - ggplot2
+  - visuzalisation
+---
+
+
+```{r setup, include=FALSE , echo=FALSE, message=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+Since Croatia beat Russia on Saturday, the Semifinals for this year's World Cup are set:
+
+* England
+* Belgium
+* France
+* Croatia
+
+I wanted to see wether the variance in odds between bookmarkers allows to draw conclusions on who will actually win (of course, it most likely will not).
+Without further ado, here is the final plot:
+
+![](https://raw.githubusercontent.com/heck1/blog/master/static/images/prediction.png)
+
+The y-Axis highlights the frequency of a given odd while the x-axis shows the probability of a given team taking the title home. As we can clearly see, France leads by a margin of over 5%.
+Belgium/England follow and Croatia is far behind.
+
+## Scraping soccer odds and visualizing the results (aka how to produce the plot)
+
+So, let's get to it:
+I found a decent site for different betting sources here: <https://www.wettfreunde.net/wm-2018-quoten/>.
+Since the link luckily contains a html-table, scraping is rather arbitrary:
+```{  message=FALSE }
+library(XML)
+library(RCurl)
+library(rlist)
+require(tidyverse)
+```
+```{}
+theurl <- getURL("https://www.wettfreunde.net/wm-2018-quoten/",.opts = list(ssl.verifypeer = FALSE) )
+tables <- readHTMLTable(theurl)
+tables <- list.clean(tables, fun = is.null, recursive = FALSE)
+n.rows <- unlist(lapply(tables, function(t) dim(t)[1:2]))
+tables <- data.frame(tables)
+tab <- tables
+```
+
+```{ }
+head(tab)
+```
+
+Okay, so far, so good. Next, some cleanup: 
+```{}
+tab <- tab[3:nrow(tab),]
+colnames(tab) <- c("Team", "interwetten",  "bet365", "tipico",  "betfair", "unibet")
+tab$Team <- as.character(tab$Team)
+team_en <- c("France", "Belgium", "England", "Croatia")
+tab$Team <- team_en
+head(tab)
+```
+
+We can see that there is a little variance in the odds. Next, we calculate the percentage of 
+any team winning the World Cup by  
+
+>(1 / odd) * 100
+
+```{}
+calculate_probs <- function(bookmarkers){
+  bookmarkers <- 1/as.numeric(str_replace_all(bookmarkers, ",", ".")) * 100
+}
+
+for(i in (colnames(tab[,2:ncol(tab)]))) {
+  tab[[i]] <- calculate_probs(tab[[i]])
+  
+}
+head(tab)
+```
+
+Looks better! Next, we visualize the result and combine the odds into a single dataframe:
+
+```{}
+tab$Game <- NULL
+tab$diff <- NULL
+tab$rowvar <- NULL
+diff <-  rowMeans(tab[,-1])
+rowvar <- apply(tab[,-1], 1, var) 
+
+tab$dv <- ( (rowvar /  diff)) * 100
+
+dat <- tab
+colnames(dat) <- 0
+new_df <- dat[,1:2]
+colnames(new_df) <- 0
+
+for (i in 3:6){ 
+  cols <- c(1, i)
+  dat[,cols]
+  new_df <- rbind(new_df, dat[,cols])
+}
+
+
+row.names(dat) <- dat$Team
+
+
+colnames(new_df) <- c("Team", "probs")
+new_df
+```
+
+The final step is vizualistation: Create a density plot with good old `ggplot2`.
+
+```{}
+ggplot(new_df, aes(x = new_df$probs , fill = new_df$Team)) + 
+  geom_density(alpha = 1) +
+  labs(title = "World Champion Predictions", x = "Probabilities", y = "Frequency of Odds",
+       fill = "Champion") 
+```
+
+
+
+Hope you enjoyed my first entry, you can find the replication code for this post [here](https://gist.github.com/heck1/df165d3b9f3f177133be4c6bd0fd6f0f).
+
+

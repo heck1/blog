@@ -1,32 +1,42 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Visuzalisation on Lukas Heck</title>
+    <title>visuzalisation on Lukas Heck</title>
     <link>/blog/tags/visuzalisation/</link>
-    <description>Recent content in Visuzalisation on Lukas Heck</description>
+    <description>Recent content in visuzalisation on Lukas Heck</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 02 Sep 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 01 Nov 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/blog/tags/visuzalisation/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Do Formula 1 Cars get faster over time?</title>
+      <link>/blog/posts/f1-racing-over-time/</link>
+      <pubDate>Fri, 01 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/posts/f1-racing-over-time/</guid>
+      <description>How much faster do F1 tracks get over time? With the help of the F1 Dataset provided at Kaggle, we are going to explore how much faster F1 cars have gotten over time.
+The datasets we are going to use are races, which includes data about the specific races, like name of the circuit, year of the GP. laps provides lap times for each GP, each driver and each round in that GP.</description>
+    </item>
+    
+    <item>
       <title>Analysing Movie Genre Popularity with imdb Data</title>
-      <link>/blog/2019/09/02/imdb-movie-analysis/</link>
+      <link>/blog/posts/imdb-movie-analysis/</link>
       <pubDate>Mon, 02 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2019/09/02/imdb-movie-analysis/</guid>
+      <guid>/blog/posts/imdb-movie-analysis/</guid>
       <description>When it comes to hobbies, films and listening to podcasts / youtube videos of people talking about films is one of my favorites. For a while now, I was interested in approaching this hobby in a data-driven manner. I stumbled upon this old rStudio blog post by none other than Hadley Wickham himself.
 After reading it, I wanted to try web-scraping with selectorgadget myself and imdb seemed like a great place to start.</description>
     </item>
     
     <item>
       <title>World Cup Winner - Finals Edition</title>
-      <link>/blog/2018/07/14/world-cup-winner-finalsedition/</link>
+      <link>/blog/posts/world-cup-winner-finalsedition/</link>
       <pubDate>Sat, 14 Jul 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/07/14/world-cup-winner-finalsedition/</guid>
+      <guid>/blog/posts/world-cup-winner-finalsedition/</guid>
       <description>Like promised, here is the updated plot after the finals:
  As it turns out, France is the clear favorite to win the World Cup tomorrow. On average, the probability of France winning is around 70% and for Croatia, the underdog, the probability based on the odds is around 30%.
 If you want to know more, see my original blog post.
@@ -35,10 +45,10 @@ Good luck to both teams tomorrow :)</description>
     
     <item>
       <title>World Cup Winner - Semifinals Edition</title>
-      <link>/blog/2018/07/09/world-cup-winner-semifinals-edition/</link>
+      <link>/blog/posts/world-cup-winner-semifinals-edition/</link>
       <pubDate>Mon, 09 Jul 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2018/07/09/world-cup-winner-semifinals-edition/</guid>
+      <guid>/blog/posts/world-cup-winner-semifinals-edition/</guid>
       <description>Since Croatia beat Russia on Saturday, the Semifinals for this year’s World Cup are set:
  England Belgium France Croatia  I wanted to see wether the variance in odds between bookmarkers allows to draw conclusions on who will actually win (of course, it most likely will not). Without further ado, here is the final plot:
  The y-Axis highlights the frequency of a given odd while the x-axis shows the probability of a given team taking the title home.</description>

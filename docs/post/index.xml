@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Lukas Heck</title>
@@ -6,10 +6,20 @@
     <description>Recent content in Posts on Lukas Heck</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 02 Sep 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 01 Nov 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/blog/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Do Formula 1 Cars get faster over time?</title>
+      <link>/blog/2019/11/01/f1-racing-over-time/</link>
+      <pubDate>Fri, 01 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/2019/11/01/f1-racing-over-time/</guid>
+      <description>How much faster do F1 tracks get over time? With the help of the F1 Dataset provided at Kaggle, we are going to explore how much faster F1 cars have gotten over time.
+The datasets we are going to use are races, which includes data about the specific races, like name of the circuit, year of the GP. laps provides lap times for each GP, each driver and each round in that GP.</description>
+    </item>
     
     <item>
       <title>Analysing Movie Genre Popularity with imdb Data</title>

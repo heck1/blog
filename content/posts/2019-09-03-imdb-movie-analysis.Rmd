@@ -1,0 +1,123 @@
+---
+title: Analysing Movie Genre Popularity with imdb Data
+author: Lukas Heck
+date: '2019-09-02'
+slug: imdb-movie-analysis
+categories: [R]
+tags:
+  - rstats
+  - r
+  - data
+  - ggplot2
+  - visuzalisation
+---
+![](https://raw.githubusercontent.com/heck1/blog/master/static/images/imdb2.png){
+width=85% }
+
+
+When it comes to hobbies, films and listening to podcasts / youtube videos of people talking about films is one of my favorites. For a while now, I was interested in approaching this hobby in a 
+data-driven manner. I stumbled upon [this old rStudio blog post](https://blog.rstudio.com/2014/11/24/rvest-easy-web-scraping-with-r/) by none other than Hadley Wickham himself. 
+
+After reading it, I wanted to try web-scraping with selectorgadget myself and imdb seemed 
+like a great place to start. I followed these questions:
+-- how to extract data efficiently from imdb directly?
+-- how can this information be used in a informative manner?
+-- how can the selectorgadget-html output be easily understood?
+
+After some time struggeling with exploring the selectorgadget-output, but [yet another blogpost](https://rstudio-pubs-static.s3.amazonaws.com/266430_f3fd4660b2744751ab144aa130768a06.html) was very helpful in helping to manage the basics. After a few attempts and some cleanup, I ended with:
+
+
+```{  message=FALSE }
+
+library(rvest)
+library(ROAuth)
+library(tidyverse)
+
+
+url <- 'https://www.imdb.com/search/title?count=100&release_date=1977,1977&title_type=feature&sort=moviemeter,asc'
+
+# read html
+
+imdb <- read_html(url)
+
+genre_data_html <- html_nodes(imdb,'.genre')
+title_data_html <- html_nodes(imdb,'.lister-item-header a')
+title_data <- html_text(title_data_html)
+genre_data <- html_text(genre_data_html)
+                
+title_data<-gsub("\n","",title_data)
+title_data<-gsub(" ","",title_data)
+                
+genre_data<-gsub("\n","",genre_data)
+genre_data<-gsub(" ","",genre_data)
+genre_data<-gsub(",.*","",genre_data)
+                
+                
+                
+                
+genre_data<-as.character(genre_data)
+title_data<-as.character(title_data)
+
+```
+
+```
+ head(genre_data)
+[1] "Action"    "Drama"     "Action"    "Comedy"    "Drama"     "Animation"
+```
+
+```
+head(title_data)
+[1] "KriegderSterne"                    "UnheimlicheBegegnungderdrittenArt"
+[3] "EinausgekochtesSchlitzohr"         "DerUntermieter"                   
+[5] "NurSamstagNacht"                   "BernardundBianca-DieMäusepolizei" 
+```
+
+So we can determine that in 1977, the year the first Star Wars movie came out, it was actually the most popular movie, followed by [Close Encounters of the Third Kind](https://www.imdb.com/title/tt0075860/?ref_=adv_li_tt).
+My first instinct was, okay, now I can create a chart for the popularity of a genre in a given year.
+But how can this be utilized further? Here is what I came up with:
+
+
+```
+yearly_fin <- data.frame()
+for (y in (1960:2018)){
+  url <- paste0("https://www.imdb.com/search/title?count=100&release_date=",y,",",y,"&title_type=feature&sort=boxoffice_gross_us,asc")
+                imdb <- read_html(url)
+                genre_data_html <- html_nodes(imdb,'.genre')
+                title_data_html <- html_nodes(imdb,'.lister-item-header a')
+                title_data <- html_text(title_data_html)
+                genre_data <- html_text(genre_data_html)
+                
+                title_data<-gsub("\n","",title_data)
+                title_data<-gsub(" ","",title_data)
+                
+                genre_data<-gsub("\n","",genre_data)
+                genre_data<-gsub(" ","",genre_data)
+                genre_data<-gsub(",.*","",genre_data)
+                
+                
+                
+                
+                genre_data<-as.character(genre_data)
+                title_data<-as.character(title_data)
+if(length(genre_data) < 100){
+  diff <- 100-length(genre_data)
+  for (i in 1:diff)
+    genre_data <- c(genre_data, as.character(i))
+}
+                
+                yearly_data <- data.frame(title_data, genre_data)
+                yearly_data$year <- y
+                yearly_fin <- rbind(yearly_fin, yearly_data)
+  print(y)
+}
+```
+
+By just looping over the years in the underlying url, one can scrape the complete time-frame on a yearly basis in around 3 minutes (depending on your internet connection). Then, I used the output of
+```yearly_fin``` to create this plot:
+[click here for the full-size](https://raw.githubusercontent.com/heck1/blog/master/static/images/imdb2.png)
+![click](https://raw.githubusercontent.com/heck1/blog/master/static/images/imdb2.png){
+width=85% }
+As we can see, for example _Horror_ was really popular in the 80s,hen vanished in the beginning of the 90s and came back in the early 2000s.
+
+Further information about the scraping process can be found in the complete code [here](https://gist.github.com/heck1/6e69e87bf277fb12789ddfe202ba8670). 
+What is next? Well, apart from this analysis barely scratching the surface of what is actually possible with rvest and the imdb-data in current form, I also was able to find the short description imdb uses in their rankings (```html_nodes(imdb,'.lister-item-header a'``` ), which should provide useful for an text-based prediction on a film`s popularity or (expexted?) gross.

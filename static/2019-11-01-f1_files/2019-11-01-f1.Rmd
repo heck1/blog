@@ -1,0 +1,204 @@
+---
+title: Do Formula 1 Cars get faster over time?
+author: Lukas Heck
+date: '2019-11-01'
+slug: f1-racing-over-time
+categories: [R]
+tags:
+  - rstats
+  - r
+  - data
+  - ggplot2
+  - visuzalisation
+---
+
+
+#### How much faster do F1 tracks get over time?
+
+With the help of the F1 Dataset provided at [Kaggle](https://www.kaggle.com/cjgdev/formula-1-race-data-19502017), we are going to explore how much faster F1 cars have gotten over time.
+
+The datasets we are going to use are `races`, which includes data about the specific races, like name of the circuit, year of the GP. 
+`laps` provides lap times for each GP, each driver and each round in that GP. The last dataset we are going to use, `results` includes the results for each GP and driver. 
+The strategy is to find different variables of interest from the differnt dataframes and bind them using the handy `raceId`, that is provided in each dataset.
+
+##### First step: Load and wrangle the data:
+
+
+
+##### Setup and load packages:
+
+```{r, message=FALSE}
+
+library(tidyverse) # for... everything?
+library(ggthemes)  # to make ggplot charts even more beautiful
+library(lubridate) # to manipulate race-times
+library(viridis)
+library(plotly)
+
+
+```
+
+##### Include and inspect data:
+
+```{r}
+races <- read.csv("data/f1/races.csv")
+head(races)
+```
+
+
+
+```{r, message=FALSE}
+laps <- read.csv("data/f1/lapTimes.csv")
+
+laps$raceId <- as.character(laps$raceId) 
+laps$sec_round <- laps$milliseconds / 1000 # Create a variable for seconds, for easier understanding and interpretability.
+
+
+head(laps)
+
+ laps %>%
+  filter(position < 6) %>%
+  mutate(position = as.character(position)) %>%
+  ggplot(aes(sec_round, fill=position, colour = position)) + geom_density(alpha = 0.1) + xlim(50,200) + theme_economist()
+
+```
+
+
+Inspecting the overall race times for positions 1 to 5, there is the smallest tendency to the left for the first two positions, but
+overall, the variance is very large.
+
+
+
+
+
+##### Create a Dataset with races and mean lap times.
+
+```{r, message=FALSE}
+
+avg_lap <- laps %>%
+  group_by(raceId) %>%
+  filter(lap == round(mean(laps$lap, na.rm = T))) %>%
+  summarise(mean_race = mean(sec_round, na.rm = T))  # Calculate the mean lap time per race for a mean lap
+
+
+races$raceId <- as.character(races$raceId)
+f1 <- left_join(races, avg_lap,by = c("raceId")) %>% select("raceId", "name", "mean_race", "year" )
+
+f1$name2 <- str_replace_all(f1$name, "Grand Prix", "")
+
+head(f1)
+```
+
+Next step: add the `result` dataset with the fastest lap time.
+
+```{r, message=FALSE}
+
+res <- read.csv("data/f1/results.csv")
+res$raceId <- as.character(res$raceId)
+res$fastest <- lubridate::ms(res$fastestLapTime)
+res$fastest <- as.duration(res$fastest)
+res$fastest <- as.numeric(res$fastest)
+res2 <- res %>%
+  filter(!(is.na(fastestLapTime)) & fastest > 1) %>%
+  group_by(raceId) %>%
+  summarise(mean_fastest = mean(fastest),na.rm = T)
+f1 <- left_join(f1,res2,by="raceId")
+
+f1 <- f1 %>% filter(year > 2004)
+
+
+
+
+```
+
+Using `lubridate`, the `fastestLapTime` column is converted into a numeric value of seconds:
+```{r}
+res[1,] %>% select(fastest,fastestLapTime)
+```
+
+
+##### Exploration and Graphical Analysis
+
+
+
+```{r, message=FALSE}
+
+
+f1 %>% filter(name2=="Monaco ") %>%
+ggplot( aes(mean_fastest )) + geom_density(alpha=.2, fill = "darkgreen") + geom_density(aes(x=mean_race), alpha=.2, fill= "red")  + theme_economist() + 
+  scale_fill_brewer(palette = "Set3")  + 
+  theme(legend.position="bottom") +
+  labs(title = "Distribution of Laptimes for the Monaco GP 2005 - 2017", subtitle = 
+         "Red: Average lap times for average rounds, Green: Fastest laps", y="Density", x= "Lap Time") 
+
+# f1  %>%
+# ggplot( aes(mean_fastest )) + geom_density(alpha=.2, fill = "darkgreen") + geom_density(aes(x=mean_race), alpha=.2, fill= "red")  + theme_economist() + 
+#   scale_fill_brewer(palette = "Set3")  + 
+#   theme(legend.position="bottom") +
+#   labs(title = "Distribution of Laptimes for the Monaco GP 2005 - 2017", subtitle = 
+#          "Red: Average lap times for average rounds, Green: Fastest laps", y="Density", x= "Lap Time") +  facet_wrap(~name2,ncol=9) 
+```
+
+
+
+
+```{r, message=FALSE,warning=FALSE}
+x <- ggplot(f1, aes(x = abs(year),
+               y=mean_race,
+               color = mean_race)) + 
+                                    geom_point()+  
+                                    geom_line(aes(y=mean_fastest), color="red")+
+                                    facet_wrap(~name2,ncol=9) +
+                                    theme_economist() + 
+                                    labs(title = "Laptimes in F1 over time", subtitle = "Grouped by Grand Prix, the line represents the fastest laps, the dots represent average laptimes.",
+                                         y="Mean lap time (in Seconds)", x= "Year") +
+                                    theme(legend.position="bottom",
+                                          axis.text.x = element_text(size = 5, angle=45),
+                                          axis.text.y = element_text(size = 6),
+                                          strip.text.x = element_text(size=8)) +
+  scale_color_gradientn(name="",colours=rev(viridis::viridis(20))) +   guides(color=FALSE)   + theme(axis.line = element_line(colour = NA), 
+    axis.ticks = element_line(linetype = "blank")) 
+
+ggplotly(x)
+```
+
+
+```{r, message=FALSE, dpi = 200}
+
+
+f1 %>%
+  filter(year > 2004 ) %>%
+  ggplot(aes(x=abs(year), y=mean_race, color = mean_race)) + geom_smooth(method = "loess") + geom_jitter()  + 
+      scale_x_continuous(limits = c(2005,2017),    
+                         breaks  =  seq(2005,2018,by = 1)) +
+  theme_economist() +   scale_color_gradient(low="#1c8000",high="red") +   guides(color=FALSE) +
+  geom_smooth(aes(y = mean_fastest), fill="red") +  labs(title = "Laptimes in F1 over time",
+                                                                    subtitle = "Blue = Average Laptime, Red = Fastest Lap",
+                                                                    y="Mean lap time", x= "Year") 
+f1 %>%
+  filter(year > 2004 ) %>%
+  ggplot(aes(x=abs(year), y=mean_race, color = mean_race)) + 
+  geom_smooth(method = "loess", fill="blue", color = "blue", size=.5, alpha=.3) +
+  geom_jitter()  + 
+      scale_x_continuous(limits = c(2005,2017),    
+                         breaks  =  seq(2005,2018,by = 1)) +
+  theme_economist() +
+  scale_color_gradient(low="#1c8000",high="red") + 
+  guides(color=FALSE) +
+  geom_line(aes(y = mean_fastest), fill="red", color = "red") +
+  labs(title = "Laptimes in F1 over time", 
+       subtitle = "Blue = Average Laptime, Red = Fastest Lap",
+       y="Mean lap time", x= "Year") +
+  facet_wrap(~name2,ncol=9) + 
+  theme(axis.line = element_line(colour = NA), 
+  axis.ticks = element_line(linetype = "blank"),
+  axis.text.x = element_text(size = 5, angle=45),
+  axis.text.y = element_text(size = 6),
+  strip.text.x = element_text(size=8)) 
+
+
+  
+
+
+```
+

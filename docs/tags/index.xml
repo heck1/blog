@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Lukas Heck</title>
@@ -6,51 +6,51 @@
     <description>Recent content in Tags on Lukas Heck</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 02 Sep 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 01 Nov 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/blog/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Data</title>
+      <title>data</title>
       <link>/blog/tags/data/</link>
-      <pubDate>Mon, 02 Sep 2019 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 01 Nov 2019 00:00:00 +0000</pubDate>
       
       <guid>/blog/tags/data/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Ggplot2</title>
+      <title>ggplot2</title>
       <link>/blog/tags/ggplot2/</link>
-      <pubDate>Mon, 02 Sep 2019 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 01 Nov 2019 00:00:00 +0000</pubDate>
       
       <guid>/blog/tags/ggplot2/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>R</title>
+      <title>r</title>
       <link>/blog/tags/r/</link>
-      <pubDate>Mon, 02 Sep 2019 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 01 Nov 2019 00:00:00 +0000</pubDate>
       
       <guid>/blog/tags/r/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Rstats</title>
+      <title>rstats</title>
       <link>/blog/tags/rstats/</link>
-      <pubDate>Mon, 02 Sep 2019 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 01 Nov 2019 00:00:00 +0000</pubDate>
       
       <guid>/blog/tags/rstats/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Visuzalisation</title>
+      <title>visuzalisation</title>
       <link>/blog/tags/visuzalisation/</link>
-      <pubDate>Mon, 02 Sep 2019 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 01 Nov 2019 00:00:00 +0000</pubDate>
       
       <guid>/blog/tags/visuzalisation/</guid>
       <description></description>

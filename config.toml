@@ -12,6 +12,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 [permalinks]
     post = "/:year/:month/:day/:slug/"
+    cv = "docs/CV Lukas Heck.pdf"
 
 [[menu.main]]
     name = "Lukas Heck"
