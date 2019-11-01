@@ -3,7 +3,7 @@ publishDir = "docs"
 languageCode = "en-us"
 title = "Lukas Heck"
 
-theme = "Hugo-lithium"
+theme = "hugo-lithium"
 
 
 googleAnalytics = "UA-121885797-1"
@@ -17,7 +17,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 [[menu.main]]
     name = "Lukas Heck"
-    url = "about/"
+    url = "/about/"
     weight = 1
   pre = "<i class=\"sidebar-button-icon fa fa-lg fa-question\"></i>"
 
@@ -39,20 +39,28 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 [params]
     description = "Lukas Heck - Data Analyst and Political Scientist"
-    url = "about/"
+    url = "/about/"
 
     # options for highlight.js (version, additional languages, and theme)
     highlightjsVersion = "9.11.0"
-    highlightjsCDN = "//cdn.bootcss.com"
+    highlightjsCDN = "//cdnjs.cloudflare.com/ajax/libs"
     highlightjsLang = ["r", "yaml"]
-    highlightjsTheme = "github"
-
+    #highlightjsTheme = "github"
     MathJaxCDN = "//cdn.bootcss.com"
     MathJaxVersion = "2.7.1"
 
+        # Set to true to disable code folding
+    disable_codefolding = true
+    # Set to "hide" or "show" all codes by default
+    codefolding_show = "hide"
+    # Set to true to exclude the "Show/hide all" button
+    codefolding_nobutton = true
+    custom_css = ["codefolding.css"]
+    custom_js = []
+
     [params.logo]
   url = "lh.png"
-  img = "about/"
+  img = "/about/"
   width = 50
     height = 50
     alt = "Lukas Heck"
